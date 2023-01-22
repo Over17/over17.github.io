@@ -319,7 +319,7 @@ Here’s the answer to the first question:
 
 ![profile_simpleperf_cas4_acq_rel](/assets/images/2023-01-22-arm-outline-atomics-profile_simpleperf_cas4_acq_rel.png)
  
-Yes, runtime detection is working correctly. Yes, LSE instructions are being used (in this particular case, <unknown> is cas\* - compare-and-swap instruction, simpleperf didn’t enable new extensions when dumping disassembly, `hint #34` is a PAC instruction `paciasp`). Yes, they are quite fast – no clear bottleneck, even if the interrupts were not 100% precise because the microarchitecture prefers to not stop at this or that instruction. No issues found here.
+Yes, runtime detection is working correctly. Yes, LSE instructions are being used (in this particular case, `<unknown>` is `cas*` - compare-and-swap instruction, simpleperf didn’t enable new extensions when dumping disassembly, `hint #34` is a PAC instruction `paciasp`). Yes, they are quite fast – no clear bottleneck, even if the interrupts were not 100% precise because the microarchitecture prefers to not stop at this or that instruction. No issues found here.
 
 Next, let’s check the profile of the call site.
  
