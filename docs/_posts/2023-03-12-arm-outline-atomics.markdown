@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Arm outline atomics"
-date:   2023-01-22 13:36:00 +0100
+date:   2023-03-12 13:36:00 +0100
 categories: performance atomics arm
 ---
 # Arm outline atomics
@@ -49,7 +49,7 @@ We have remarkable Native Performance tests which run on CI and report to a huge
 
 On a Shield, there’s a single change that’s worth mentioning: a slight regression in global_no_contention_Atomic_Add.
 
-![unity_perftest_shield_global_no_contention_Atomic_Add](/assets/images/2023-01-22-arm-outline-atomics-unity_perftest_shield_global_no_contention_Atomic_Add.png) 
+![unity_perftest_shield_global_no_contention_Atomic_Add](/assets/images/2023-03-12-arm-outline-atomics-unity_perftest_shield_global_no_contention_Atomic_Add.png) 
 
 Few other regressions are most likely unrelated.
 
@@ -57,10 +57,10 @@ Let’s try on an LSE-capable device then. I’m running the tests locally and r
 
 The results are unfortunately quite unstable - and it partly relies on the fact that it’s running on a consumer device lying on my table. However, few results are curious.
 
-![unity_perftest_s22_1](/assets/images/2023-01-22-arm-outline-atomics-unity_perftest_s22_1.png) 
-![unity_perftest_s22_2](/assets/images/2023-01-22-arm-outline-atomics-unity_perftest_s22_2.png) 
-![unity_perftest_s22_3](/assets/images/2023-01-22-arm-outline-atomics-unity_perftest_s22_3.png)
-![unity_perftest_s22_4](/assets/images/2023-01-22-arm-outline-atomics-unity_perftest_s22_4.png)
+![unity_perftest_s22_1](/assets/images/2023-03-12-arm-outline-atomics-unity_perftest_s22_1.png) 
+![unity_perftest_s22_2](/assets/images/2023-03-12-arm-outline-atomics-unity_perftest_s22_2.png) 
+![unity_perftest_s22_3](/assets/images/2023-03-12-arm-outline-atomics-unity_perftest_s22_3.png)
+![unity_perftest_s22_4](/assets/images/2023-03-12-arm-outline-atomics-unity_perftest_s22_4.png)
  
 
 The global_no_contention_Atomic_Add which regressed on a Shield, shows an improvement on S22 (0.12 => 0.10ms). Some of the MemoryManagerPerformance tests improved significantly. Looks good so far!
@@ -317,19 +317,19 @@ So it’s doable in Streamline too, but this time I used Google’s simpleperf b
 
 Here’s the answer to the first question:
 
-![profile_simpleperf_cas4_acq_rel](/assets/images/2023-01-22-arm-outline-atomics-profile_simpleperf_cas4_acq_rel.png)
+![profile_simpleperf_cas4_acq_rel](/assets/images/2023-03-12-arm-outline-atomics-profile_simpleperf_cas4_acq_rel.png)
  
 Yes, runtime detection is working correctly. Yes, LSE instructions are being used (in this particular case, `<unknown>` is `cas*` - compare-and-swap instruction, simpleperf didn’t enable new extensions when dumping disassembly, `hint #34` is a PAC instruction `paciasp`). Yes, they are quite fast – no clear bottleneck, even if the interrupts were not 100% precise because the microarchitecture prefers to not stop at this or that instruction. No issues found here.
 
 Next, let’s check the profile of the call site.
  
-![profile_simpleperf_outline_callsite](/assets/images/2023-01-22-arm-outline-atomics-profile_simpleperf_outline_callsite.png)
+![profile_simpleperf_outline_callsite](/assets/images/2023-03-12-arm-outline-atomics-profile_simpleperf_outline_callsite.png)
  
 It is unlikely that subs takes that much CPU time. Maybe the CPU interrupts are one instruction off here, but it could also be a side effect of the full memory barrier that the next instruction has to wait longer than expected. Anyway, most of the time is being spent in the memory barrier and around it, which doesn’t really answer the question – why is it performing slower than a non-LSE version? 
 
 Here’s to the assembly of LL/SC version:
  
-![profile_simpleperf_ll_sc](/assets/images/2023-01-22-arm-outline-atomics-profile_simpleperf_ll_sc.png) 
+![profile_simpleperf_ll_sc](/assets/images/2023-03-12-arm-outline-atomics-profile_simpleperf_ll_sc.png) 
  
 _(please disregard the yellow markup)_
 
@@ -388,7 +388,7 @@ I raised the question with Arm compiler folks, and we found out that **the pure 
 
 The profile confirms that LSE is actually used:
  
-![profile_simpleperf_std_atomic_cas4_acq_rel](/assets/images/2023-01-22-arm-outline-atomics-profile_simpleperf_std_atomic_cas4_acq_rel.png)
+![profile_simpleperf_std_atomic_cas4_acq_rel](/assets/images/2023-03-12-arm-outline-atomics-profile_simpleperf_std_atomic_cas4_acq_rel.png)
 
 Overall, some of baselib’s std::atomic benchmarks show performance regressions in outline atomics vs. LL/SC versions on LSE-capable devices. This shouldn't happen. We spent some time with out friends at Arm investigating this, and I'll share results in a separate post.
 
@@ -400,7 +400,7 @@ At first, I tried obtaining some skills in writing inline assembly in C, but aft
 
 Now, on to performance. Selected benchmark results are available in the table below.
 
-![perf_pure_lse](/assets/images/2023-01-22-arm-outline-atomics-perf_pure_lse.png)
+![perf_pure_lse](/assets/images/2023-03-12-arm-outline-atomics-perf_pure_lse.png)
 
 Results:
 -	As expected, pure LSE is always faster than outline atomics
