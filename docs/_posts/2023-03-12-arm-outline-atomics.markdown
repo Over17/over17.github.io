@@ -413,15 +413,137 @@ Overall, the result is expected: the overhead is there, but it’s not very high
 
 The test device for local tests was Huawei Honor 9 (Cortex A53).
 
-**TODO**
-The benchmark results in text form are available here: 
+| Testcase | Benchmark | default, ns | outline, ns | Change |
+|---|---|---|---|---|
+|Atomic - Single Threaded (int64_t) |fetch_add(relaxed)|8,7645|13,472|53,71%|
+|Atomic - Single Threaded (int64_t) |fetch_add(acquire)|8,7609|13,509|54,20%|
+|Atomic - Single Threaded (int64_t) |fetch_add(release)|9,434|14,158|50,07%|
+|Atomic - Single Threaded (int64_t) |fetch_add(acq_rel)|9,4301|14,139|49,93%|
+|Atomic - Single Threaded (int64_t) |fetch_add(seq_cst)|12,126|14,821|22,22%|
+|Atomic - Single Threaded (int64_t) |fetch_and(relaxed)|8,7579|13,479|53,91%|
+|Atomic - Single Threaded (int64_t) |fetch_and(acquire)|8,7507|13,483|54,08%|
+|Atomic - Single Threaded (int64_t) |fetch_and(release)|9,4248|14,155|50,19%|
+|Atomic - Single Threaded (int64_t) |fetch_and(acq_rel)|9,4281|14,25|51,14%|
+|Atomic - Single Threaded (int64_t) |fetch_and(seq_cst)|12,12|14,827|22,33%|
+|Atomic - Single Threaded (int64_t) |fetch_or(relaxed)|8,7657|13,474|53,71%|
+|Atomic - Single Threaded (int64_t) |fetch_or(acquire)|8,7623|13,477|53,81%|
+|Atomic - Single Threaded (int64_t) |fetch_or(release)|9,4364|14,152|49,97%|
+|Atomic - Single Threaded (int64_t) |fetch_or(acq_rel)|9,4307|14,164|50,19%|
+|Atomic - Single Threaded (int64_t) |fetch_or(seq_cst)|12,133|14,829|22,22%|
+|Atomic - Single Threaded (int64_t) |fetch_xor(relaxed)|8,7602|13,472|53,79%|
+|Atomic - Single Threaded (int64_t) |fetch_xor(acquire)|8,7708|13,49|53,81%|
+|Atomic - Single Threaded (int64_t) |fetch_xor(release)|9,475|14,254|50,44%|
+|Atomic - Single Threaded (int64_t) |fetch_xor(acq_rel)|9,4521|14,145|49,65%|
+|Atomic - Single Threaded (int64_t) |fetch_xor(seq_cst)|12,134|14,84|22,30%|
+|Atomic - Single Threaded (int64_t) |exchange(relaxed)|0,00017724|0,00017163|-3,17%|
+|Atomic - Single Threaded (int64_t) |exchange(acquire)|8,7589|13,469|53,78%|
+|Atomic - Single Threaded (int64_t) |exchange(release)|0,00017292|0,00017162|-0,75%|
+|Atomic - Single Threaded (int64_t) |exchange(acq_rel)|10,784|15,503|43,76%|
+|Atomic - Single Threaded (int64_t) |exchange(seq_cst)|12,142|16,176|33,22%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(relaxed,relaxed)|4,7|12,808|172,51%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(relaxed,relaxed)|8,094|14,168|75,04%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acquire,relaxed)|4,723|11,465|142,75%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acquire,relaxed)|8,0849|14,251|76,27%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acquire,acquire)|4,716|12,806|171,54%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acquire,acquire)|8,0929|14,159|74,96%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(release,relaxed)|4,7166|11,454|142,84%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(release,relaxed)|8,7658|14,822|69,09%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acq_rel,relaxed)|4,7171|12,797|171,29%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acq_rel,relaxed)|8,7552|14,828|69,36%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acq_rel,acquire)|4,7161|11,442|142,62%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acq_rel,acquire)|8,7553|14,824|69,31%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,relaxed)|4,7327|12,9|172,57%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,relaxed)|13,471|16,173|20,06%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,acquire)|4,7116|14,16|200,53%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,acquire)|13,479|16,189|20,11%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,seq_cst)|7,4291|12,812|72,46%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,seq_cst)|12,132|15,492|27,70%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(relaxed,relaxed)|4,7175|11,465|143,03%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(relaxed,relaxed)|10,103|14,152|40,08%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acquire,relaxed)|4,7216|12,803|171,16%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acquire,relaxed)|10,11|14,241|40,86%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acquire,acquire)|4,7157|11,468|143,19%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acquire,acquire)|10,113|14,161|40,03%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(release,relaxed)|4,7336|12,828|171,00%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(release,relaxed)|10,774|14,813|37,49%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acq_rel,relaxed)|4,7194|11,46|142,83%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acq_rel,relaxed)|10,8|14,842|37,43%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acq_rel,acquire)|4,715|12,8|171,47%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acq_rel,acquire)|10,776|14,821|37,54%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,relaxed)|4,7202|14,24|201,68%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,relaxed)|13,486|16,179|19,97%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,acquire)|4,7181|12,824|171,80%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,acquire)|13,485|16,189|20,05%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,seq_cst)|7,4121|12,154|63,98%|
+|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,seq_cst)|12,801|15,5|21,08%|
+|std::atomic - Single Threaded (int64_t)|fetch_add(relaxed)|10,111|14,226|40,70%|
+|std::atomic - Single Threaded (int64_t)|fetch_add(acquire)|12,807|17,533|36,90%|
+|std::atomic - Single Threaded (int64_t)|fetch_add(release)|13,485|18,209|35,03%|
+|std::atomic - Single Threaded (int64_t)|fetch_add(acq_rel)|13,464|17,523|30,15%|
+|std::atomic - Single Threaded (int64_t)|fetch_add(seq_cst)|13,469|17,535|30,19%|
+|std::atomic - Single Threaded (int64_t)|fetch_and(relaxed)|10,121|14,14|39,71%|
+|std::atomic - Single Threaded (int64_t)|fetch_and(acquire)|12,819|17,543|36,85%|
+|std::atomic - Single Threaded (int64_t)|fetch_and(release)|13,464|18,29|35,84%|
+|std::atomic - Single Threaded (int64_t)|fetch_and(acq_rel)|13,506|17,521|29,73%|
+|std::atomic - Single Threaded (int64_t)|fetch_and(seq_cst)|13,48|17,535|30,08%|
+|std::atomic - Single Threaded (int64_t)|fetch_or(relaxed)|10,116|14,17|40,08%|
+|std::atomic - Single Threaded (int64_t)|fetch_or(acquire)|12,802|17,514|36,81%|
+|std::atomic - Single Threaded (int64_t)|fetch_or(release)|13,483|18,199|34,98%|
+|std::atomic - Single Threaded (int64_t)|fetch_or(acq_rel)|13,481|17,525|30,00%|
+|std::atomic - Single Threaded (int64_t)|fetch_or(seq_cst)|13,48|17,5|29,82%|
+|std::atomic - Single Threaded (int64_t)|fetch_xor(relaxed)|10,135|14,27|40,80%|
+|std::atomic - Single Threaded (int64_t)|fetch_xor(acquire)|12,798|17,517|36,87%|
+|std::atomic - Single Threaded (int64_t)|fetch_xor(release)|13,471|18,187|35,01%|
+|std::atomic - Single Threaded (int64_t)|fetch_xor(acq_rel)|13,482|17,516|29,92%|
+|std::atomic - Single Threaded (int64_t)|fetch_xor(seq_cst)|13,62|17,516|28,60%|
+|std::atomic - Single Threaded (int64_t)|exchange(relaxed)|4,2759|4,0396|-5,53%|
+|std::atomic - Single Threaded (int64_t)|exchange(acquire)|12,796|17,529|36,99%|
+|std::atomic - Single Threaded (int64_t)|exchange(release)|9,437|9,446|0,10%|
+|std::atomic - Single Threaded (int64_t)|exchange(acq_rel)|14,826|18,97|27,95%|
+|std::atomic - Single Threaded (int64_t)|exchange(seq_cst)|14,821|18,872|27,33%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(relaxed, relaxed,fail)|16,841|28,313|68,12%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(relaxed, relaxed,success)|14,151|27,637|95,30%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, relaxed,fail)|22,244|31,011|39,41%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, relaxed,success)|19,546|29,074|48,75%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, acquire,fail)|19,545|31|58,61%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, acquire,success)|18,863|28,982|53,64%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(release, relaxed,fail)|20,208|30,334|50,11%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(release, relaxed,success)|19,544|30,014|53,57%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, relaxed,fail)|22,266|29,694|33,36%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, relaxed,success)|20,232|29,756|47,07%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, acquire,fail)|19,547|29,766|52,28%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, acquire,success)|20,216|29,784|47,33%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, relaxed,fail)|24,274|32,373|33,36%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, relaxed,success)|22,851|32,993|44,38%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, acquire,fail)|20,89|33,678|61,22%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, acquire,success)|20,88|35,128|68,24%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,fail)|22,91|32,35|41,20%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,success)|21,559|33,07|53,39%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(relaxed, relaxed,fail)|16,856|28,309|67,95%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(relaxed, relaxed,success)|14,151|27,72|95,89%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, relaxed,fail)|22,247|30,994|39,32%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, relaxed,success)|19,531|28,984|48,40%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, acquire,fail)|20,884|30,979|48,34%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, acquire,success)|19,552|29,102|48,84%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(release, relaxed,fail)|20,21|30,34|50,12%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(release, relaxed,success)|19,537|29,982|53,46%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, relaxed,fail)|22,227|29,674|33,50%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, relaxed,success)|20,196|29,732|47,22%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, acquire,fail)|20,86|29,6|41,90%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, acquire,success)|20,205|29,645|46,72%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, relaxed,fail)|24,917|32,326|29,73%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, relaxed,success)|22,35|33,308|49,03%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, acquire,fail)|20,898|33,711|61,31%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, acquire,success)|20,219|35,049|73,35%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,fail)|22,916|32,376|41,28%|
+|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,success)|20,902|33,571|60,61%|
 
 The absolute numbers are significantly slower than on the S22 (more than 2x), which is not surprising.
 
 Comparing the outline version to a “normal” one (inline LL/SC atomics), the following conclusions can be made:
 -	Outline atomics are always slower than “normal” builds
 -	The absolute overhead of outline atomics lies within the range of 5 to 10 ns (!!) which is much higher than on LSE-capable devices. This applies both to STL’s and baselib’s atomics.
--	The relative overhead is quite high in this case, higher than the 20% threshold suggested at the beginning, and in some cases as high as 50%.
+-	The relative overhead is quite high in this case, higher than the 20% threshold suggested at the beginning, and in some cases even more than 100%.
 
 Our friends at Arm did their own measurements and confirmed that the overhead of outline atomics on Cortex-A53 is higher than that on LSE-capable devices, likely caused by less efficient branch prediction.
  
