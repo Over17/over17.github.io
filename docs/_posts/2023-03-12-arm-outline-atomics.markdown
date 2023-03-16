@@ -87,9 +87,6 @@ Baselib possesses a great collection of benchmarks, which cover all atomics use 
 
 The results of running the benchmarks on Galaxy S22 (LSE-capable) are available in the table below.
 
-<details>
-  <summary>Click here to expand the table with the benchmark results for Galaxy S22 (Cortex X2+A710)</summary>
-
 | Testcase | Benchmark | default, ns | outline, ns | Change |
 |---|---|---|---|---|
 |Baselib atomics (int64_t) | load(relaxed)|0,000385595|0,000386961|0,35%|
@@ -226,8 +223,6 @@ The results of running the benchmarks on Galaxy S22 (LSE-capable) are available 
 |std::atomic (int64_t) | cmp_xchg_strong(seq_cst. acquire) success|5,75014|8,08624|40,63%|
 |std::atomic (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) fail|5,51236|8,15659|47,97%|
 |std::atomic (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) success|5,63752|8,13753|44,35%|
-
-</details>
 
 Most important observations are:
 -	baselib’s fetch_[op], exchange, compare-and-exchange show a clear improvement of some 10-20% - which is expected – and is a great result!
@@ -418,9 +413,6 @@ Overall, the result is expected: the overhead is there, but it’s not very high
 
 The test device for local tests was Huawei Honor 9 (Cortex A53).
 
-<details>
-  <summary>Click here to expand the table with the benchmark results for Huawei Honor 9 (Cortex A53)</summary>
-
 | Testcase | Benchmark | default, ns | outline, ns | Change |
 |---|---|---|---|---|
 |Baselib atomics (int64_t) |fetch_add(relaxed)|8,7645|13,472|53,71%|
@@ -545,8 +537,6 @@ The test device for local tests was Huawei Honor 9 (Cortex A53).
 |std::atomic (int64_t)|cmp_xchg_strong(seq_cst, acquire,success)|20,219|35,049|73,35%|
 |std::atomic (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,fail)|22,916|32,376|41,28%|
 |std::atomic (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,success)|20,902|33,571|60,61%|
-
-</details>
 
 The absolute numbers are significantly slower than on the S22 (more than 2x), which is not surprising.
 
