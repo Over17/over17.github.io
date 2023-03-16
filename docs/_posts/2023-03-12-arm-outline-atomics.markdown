@@ -41,7 +41,7 @@ This is the most important thing. Here’s the plan:
 The following devices were used:
 -	non-LSE: nVidia Shields in our CI buildfarm, Cortex A57
 -	non-LSE: Huawei Honor 9, Cortex A53 (tested locally)
--	LSE: Samsung Galaxy S22, Cortex X2+A710+A510, latest Armv9 device on the market at the time of writing (tested locally)
+-	LSE: Samsung Galaxy S22, Cortex X2+A710+A510, latest Armv9 device on the market at the time of testing (tested locally)
 
 ## Round 1. Main Unity and CI
 
@@ -89,140 +89,140 @@ The results of running the benchmarks on Galaxy S22 (LSE-capable) are available 
 
 | Testcase | Benchmark | default, ns | outline, ns | Change |
 |---|---|---|---|---|
-|Atomic - Single Threaded (int64_t) | load(relaxed)|0,000385595|0,000386961|0,35%|
-|Atomic - Single Threaded (int64_t) | load(acquire)|0,000385233|0,00039|1,24%|
-|Atomic - Single Threaded (int64_t) | load(seq_cst)|0,00039|0,00039125|0,32%|
-|Atomic - Single Threaded (int64_t) | store(relaxed)|0,000393934|0,000385104|-2,24%|
-|Atomic - Single Threaded (int64_t) | store(release)|0,00039|0,000393064|0,79%|
-|Atomic - Single Threaded (int64_t) | store(seq_cst)|0,00039125|0,00039|-0,32%|
-|Atomic - Single Threaded (int64_t) | fetch_add(relaxed)|5,72956|4,99676|-12,79%|
-|Atomic - Single Threaded (int64_t) | fetch_add(acquire)|5,67628|4,95283|-12,75%|
-|Atomic - Single Threaded (int64_t) | fetch_add(release)|5,68544|4,98981|-12,24%|
-|Atomic - Single Threaded (int64_t) | fetch_add(acq_rel)|5,67653|4,9972|-11,97%|
-|Atomic - Single Threaded (int64_t) | fetch_add(seq_cst)|7,27749|7,52526|3,40%|
-|Atomic - Single Threaded (int64_t) | fetch_and(relaxed)|5,67146|4,99698|-11,89%|
-|Atomic - Single Threaded (int64_t) | fetch_and(acquire)|5,673|4,8902|-13,80%|
-|Atomic - Single Threaded (int64_t) | fetch_and(release)|5,67463|4,92497|-13,21%|
-|Atomic - Single Threaded (int64_t) | fetch_and(acq_rel)|5,72999|5,04349|-11,98%|
-|Atomic - Single Threaded (int64_t) | fetch_and(seq_cst)|7,27855|7,50369|3,09%|
-|Atomic - Single Threaded (int64_t) | fetch_or(relaxed)|5,67244|4,99649|-11,92%|
-|Atomic - Single Threaded (int64_t) | fetch_or(acquire)|5,67435|5,04275|-11,13%|
-|Atomic - Single Threaded (int64_t) | fetch_or(release)|5,67056|4,95184|-12,67%|
-|Atomic - Single Threaded (int64_t) | fetch_or(acq_rel)|5,69323|4,95234|-13,01%|
-|Atomic - Single Threaded (int64_t) | fetch_or(seq_cst)|7,39012|7,53271|1,93%|
-|Atomic - Single Threaded (int64_t) | fetch_xor(relaxed)|5,72943|4,99723|-12,78%|
-|Atomic - Single Threaded (int64_t) | fetch_xor(acquire)|5,72798|4,92503|-14,02%|
-|Atomic - Single Threaded (int64_t) | fetch_xor(release)|5,67386|4,96399|-12,51%|
-|Atomic - Single Threaded (int64_t) | fetch_xor(acq_rel)|5,67432|4,99725|-11,93%|
-|Atomic - Single Threaded (int64_t) | fetch_xor(seq_cst)|7,27855|7,45118|2,37%|
-|Atomic - Single Threaded (int64_t) | exchange(relaxed)|0,000393206|0,00039125|-0,50%|
-|Atomic - Single Threaded (int64_t) | exchange(acquire)|5,43095|5,04421|-7,12%|
-|Atomic - Single Threaded (int64_t) | exchange(release)|0,00039125|0,000389176|-0,53%|
-|Atomic - Single Threaded (int64_t) | exchange(acq_rel)|5,50492|5,05285|-8,21%|
-|Atomic - Single Threaded (int64_t) | exchange(seq_cst)|7,23937|7,53526|4,09%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(relaxed. relaxed)|5,2336|5,45062|4,15%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(relaxed. relaxed)|5,88586|5,419|-7,93%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(acquire. relaxed)|5,23867|5,39911|3,06%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(acquire. relaxed)|5,95429|5,46143|-8,28%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(acquire. acquire)|5,28305|5,39779|2,17%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(acquire. acquire)|5,95301|5,38517|-9,54%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(release. relaxed)|5,30522|5,45177|2,76%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(release. relaxed)|5,88906|5,41026|-8,13%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(acq_rel. relaxed)|5,23937|5,39805|3,03%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(acq_rel. relaxed)|5,9027|5,36478|-9,11%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(acq_rel. acquire)|5,2675|5,44287|3,33%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(acq_rel. acquire)|5,86618|5,39944|-7,96%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(seq_cst. relaxed)|5,16631|6,84211|32,44%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(seq_cst. relaxed)|7,54723|8,33851|10,48%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(seq_cst. acquire)|5,34307|6,81893|27,62%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(seq_cst. acquire)|7,56281|8,30719|9,84%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak fail(seq_cst. seq_cst)|5,17506|7,59047|46,67%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_weak success(seq_cst. seq_cst)|5,5682|7,65737|37,52%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(relaxed. relaxed)|5,21179|5,39832|3,58%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(relaxed. relaxed)|5,69832|5,42264|-4,84%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(acquire. relaxed)|5,23045|5,39779|3,20%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(acquire. relaxed)|5,83734|5,42521|-7,06%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(acquire. acquire)|5,21508|5,45208|4,54%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(acquire. acquire)|5,87539|5,40666|-7,98%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(release. relaxed)|5,24858|5,45319|3,90%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(release. relaxed)|5,78798|5,41572|-6,43%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(acq_rel. relaxed)|5,24169|5,39858|2,99%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(acq_rel. relaxed)|5,77166|5,46338|-5,34%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(acq_rel. acquire)|5,22574|5,39832|3,30%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(acq_rel. acquire)|5,66156|5,38044|-4,97%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(seq_cst. relaxed)|5,31198|6,82313|28,45%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(seq_cst. relaxed)|7,60092|8,2542|8,59%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(seq_cst. acquire)|5,3248|6,84395|28,53%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(seq_cst. acquire)|7,48102|8,25419|10,34%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong fail(seq_cst. seq_cst)|5,24991|7,65791|45,87%|
-|Atomic - Single Threaded (int64_t) | cmp_xchg_strong success(seq_cst. seq_cst)|7,41788|7,63039|2,86%|
-|std::atomic - Single Threaded (int64_t) | load(relaxed)|0,00039|0,00039|0,00%|
-|std::atomic - Single Threaded (int64_t) | load(acquire)|0,00039|0,00039|0,00%|
-|std::atomic - Single Threaded (int64_t) | load(seq_cst)|0,0003925|0,000395796|0,84%|
-|std::atomic - Single Threaded (int64_t) | store(relaxed)|0,00039|0,0003925|0,64%|
-|std::atomic - Single Threaded (int64_t) | store(release)|0,00039125|0,00039|-0,32%|
-|std::atomic - Single Threaded (int64_t) | store(seq_cst)|0,00039125|0,00039|-0,32%|
-|std::atomic - Single Threaded (int64_t) | fetch_add(relaxed)|5,76841|5,04124|-12,61%|
-|std::atomic - Single Threaded (int64_t) | fetch_add(acquire)|5,67638|5,23763|-7,73%|
-|std::atomic - Single Threaded (int64_t) | fetch_add(release)|5,71074|5,21996|-8,59%|
-|std::atomic - Single Threaded (int64_t) | fetch_add(acq_rel)|5,68082|5,17513|-8,90%|
-|std::atomic - Single Threaded (int64_t) | fetch_add(seq_cst)|5,71148|5,25163|-8,05%|
-|std::atomic - Single Threaded (int64_t) | fetch_and(relaxed)|5,76754|5,06334|-12,21%|
-|std::atomic - Single Threaded (int64_t) | fetch_and(acquire)|5,68766|5,17591|-9,00%|
-|std::atomic - Single Threaded (int64_t) | fetch_and(release)|5,70922|5,23549|-8,30%|
-|std::atomic - Single Threaded (int64_t) | fetch_and(acq_rel)|5,76538|5,23106|-9,27%|
-|std::atomic - Single Threaded (int64_t) | fetch_and(seq_cst)|5,71144|5,20844|-8,81%|
-|std::atomic - Single Threaded (int64_t) | fetch_or(relaxed)|5,71144|5,06334|-11,35%|
-|std::atomic - Single Threaded (int64_t) | fetch_or(acquire)|5,67575|5,17685|-8,79%|
-|std::atomic - Single Threaded (int64_t) | fetch_or(release)|5,70869|5,17661|-9,32%|
-|std::atomic - Single Threaded (int64_t) | fetch_or(acq_rel)|5,71081|5,21962|-8,60%|
-|std::atomic - Single Threaded (int64_t) | fetch_or(seq_cst)|5,71097|5,2925|-7,33%|
-|std::atomic - Single Threaded (int64_t) | fetch_xor(relaxed)|5,76597|5,04114|-12,57%|
-|std::atomic - Single Threaded (int64_t) | fetch_xor(acquire)|5,71112|5,1749|-9,39%|
-|std::atomic - Single Threaded (int64_t) | fetch_xor(release)|5,71097|5,28538|-7,45%|
-|std::atomic - Single Threaded (int64_t) | fetch_xor(acq_rel)|5,76538|5,25347|-8,88%|
-|std::atomic - Single Threaded (int64_t) | fetch_xor(seq_cst)|5,71125|5,209|-8,79%|
-|std::atomic - Single Threaded (int64_t) | exchange(relaxed)|0,713731|0,720574|0,96%|
-|std::atomic - Single Threaded (int64_t) | exchange(acquire)|5,52406|5,2086|-5,71%|
-|std::atomic - Single Threaded (int64_t) | exchange(release)|1,42757|1,78423|24,98%|
-|std::atomic - Single Threaded (int64_t) | exchange(acq_rel)|5,48457|5,17565|-5,63%|
-|std::atomic - Single Threaded (int64_t) | exchange(seq_cst)|5,52522|5,17559|-6,33%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(relaxed. relaxed) fail|5,28103|6,86618|30,02%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(relaxed. relaxed) success|5,57233|6,65872|19,50%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acquire. relaxed) fail|5,32297|7,65681|43,84%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acquire. relaxed) success|5,55278|7,04572|26,89%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acquire. acquire) fail|5,19573|7,5397|45,11%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acquire. acquire) success|5,65387|7,06106|24,89%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(release. relaxed) fail|5,16921|8,64542|67,25%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(release. relaxed) success|5,8789|8,09059|37,62%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acq_rel. relaxed) fail|5,14874|8,4178|63,49%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acq_rel. relaxed) success|5,62648|8,15887|45,01%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acq_rel. acquire) fail|5,19702|8,41399|61,90%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(acq_rel. acquire) success|5,61241|8,0948|44,23%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. relaxed) fail|5,6107|8,45259|50,65%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. relaxed) success|5,74546|8,06755|40,42%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. acquire) fail|5,19561|8,4248|62,15%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. acquire) success|5,83114|8,08243|38,61%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. seq_cst) fail|5,44959|8,5268|56,47%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_weak(seq_cst. seq_cst) success|5,68065|8,06806|42,03%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(relaxed. relaxed) fail|5,37833|6,92512|28,76%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(relaxed. relaxed) success|5,59084|6,70653|19,96%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acquire. relaxed) fail|5,22344|7,39602|41,59%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acquire. relaxed) success|5,53385|7,11215|28,52%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acquire. acquire) fail|5,19899|7,37137|41,78%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acquire. acquire) success|5,71289|7,13459|24,89%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(release. relaxed) fail|5,18419|8,51836|64,31%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(release. relaxed) success|5,62459|8,22757|46,28%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acq_rel. relaxed) fail|5,17071|8,19045|58,40%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acq_rel. relaxed) success|5,7873|8,10029|39,97%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acq_rel. acquire) fail|5,16332|8,22449|59,29%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(acq_rel. acquire) success|5,87045|8,11597|38,25%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. relaxed) fail|5,57339|8,15235|46,27%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. relaxed) success|5,67978|8,15304|43,54%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. acquire) fail|5,19931|8,14173|56,59%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. acquire) success|5,75014|8,08624|40,63%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) fail|5,51236|8,15659|47,97%|
-|std::atomic - Single Threaded (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) success|5,63752|8,13753|44,35%|
+|Baselib atomics (int64_t) | load(relaxed)|0,000385595|0,000386961|0,35%|
+|Baselib atomics (int64_t) | load(acquire)|0,000385233|0,00039|1,24%|
+|Baselib atomics (int64_t) | load(seq_cst)|0,00039|0,00039125|0,32%|
+|Baselib atomics (int64_t) | store(relaxed)|0,000393934|0,000385104|-2,24%|
+|Baselib atomics (int64_t) | store(release)|0,00039|0,000393064|0,79%|
+|Baselib atomics (int64_t) | store(seq_cst)|0,00039125|0,00039|-0,32%|
+|Baselib atomics (int64_t) | fetch_add(relaxed)|5,72956|4,99676|-12,79%|
+|Baselib atomics (int64_t) | fetch_add(acquire)|5,67628|4,95283|-12,75%|
+|Baselib atomics (int64_t) | fetch_add(release)|5,68544|4,98981|-12,24%|
+|Baselib atomics (int64_t) | fetch_add(acq_rel)|5,67653|4,9972|-11,97%|
+|Baselib atomics (int64_t) | fetch_add(seq_cst)|7,27749|7,52526|3,40%|
+|Baselib atomics (int64_t) | fetch_and(relaxed)|5,67146|4,99698|-11,89%|
+|Baselib atomics (int64_t) | fetch_and(acquire)|5,673|4,8902|-13,80%|
+|Baselib atomics (int64_t) | fetch_and(release)|5,67463|4,92497|-13,21%|
+|Baselib atomics (int64_t) | fetch_and(acq_rel)|5,72999|5,04349|-11,98%|
+|Baselib atomics (int64_t) | fetch_and(seq_cst)|7,27855|7,50369|3,09%|
+|Baselib atomics (int64_t) | fetch_or(relaxed)|5,67244|4,99649|-11,92%|
+|Baselib atomics (int64_t) | fetch_or(acquire)|5,67435|5,04275|-11,13%|
+|Baselib atomics (int64_t) | fetch_or(release)|5,67056|4,95184|-12,67%|
+|Baselib atomics (int64_t) | fetch_or(acq_rel)|5,69323|4,95234|-13,01%|
+|Baselib atomics (int64_t) | fetch_or(seq_cst)|7,39012|7,53271|1,93%|
+|Baselib atomics (int64_t) | fetch_xor(relaxed)|5,72943|4,99723|-12,78%|
+|Baselib atomics (int64_t) | fetch_xor(acquire)|5,72798|4,92503|-14,02%|
+|Baselib atomics (int64_t) | fetch_xor(release)|5,67386|4,96399|-12,51%|
+|Baselib atomics (int64_t) | fetch_xor(acq_rel)|5,67432|4,99725|-11,93%|
+|Baselib atomics (int64_t) | fetch_xor(seq_cst)|7,27855|7,45118|2,37%|
+|Baselib atomics (int64_t) | exchange(relaxed)|0,000393206|0,00039125|-0,50%|
+|Baselib atomics (int64_t) | exchange(acquire)|5,43095|5,04421|-7,12%|
+|Baselib atomics (int64_t) | exchange(release)|0,00039125|0,000389176|-0,53%|
+|Baselib atomics (int64_t) | exchange(acq_rel)|5,50492|5,05285|-8,21%|
+|Baselib atomics (int64_t) | exchange(seq_cst)|7,23937|7,53526|4,09%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(relaxed. relaxed)|5,2336|5,45062|4,15%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(relaxed. relaxed)|5,88586|5,419|-7,93%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(acquire. relaxed)|5,23867|5,39911|3,06%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(acquire. relaxed)|5,95429|5,46143|-8,28%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(acquire. acquire)|5,28305|5,39779|2,17%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(acquire. acquire)|5,95301|5,38517|-9,54%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(release. relaxed)|5,30522|5,45177|2,76%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(release. relaxed)|5,88906|5,41026|-8,13%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(acq_rel. relaxed)|5,23937|5,39805|3,03%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(acq_rel. relaxed)|5,9027|5,36478|-9,11%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(acq_rel. acquire)|5,2675|5,44287|3,33%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(acq_rel. acquire)|5,86618|5,39944|-7,96%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(seq_cst. relaxed)|5,16631|6,84211|32,44%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(seq_cst. relaxed)|7,54723|8,33851|10,48%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(seq_cst. acquire)|5,34307|6,81893|27,62%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(seq_cst. acquire)|7,56281|8,30719|9,84%|
+|Baselib atomics (int64_t) | cmp_xchg_weak fail(seq_cst. seq_cst)|5,17506|7,59047|46,67%|
+|Baselib atomics (int64_t) | cmp_xchg_weak success(seq_cst. seq_cst)|5,5682|7,65737|37,52%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(relaxed. relaxed)|5,21179|5,39832|3,58%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(relaxed. relaxed)|5,69832|5,42264|-4,84%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(acquire. relaxed)|5,23045|5,39779|3,20%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(acquire. relaxed)|5,83734|5,42521|-7,06%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(acquire. acquire)|5,21508|5,45208|4,54%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(acquire. acquire)|5,87539|5,40666|-7,98%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(release. relaxed)|5,24858|5,45319|3,90%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(release. relaxed)|5,78798|5,41572|-6,43%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(acq_rel. relaxed)|5,24169|5,39858|2,99%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(acq_rel. relaxed)|5,77166|5,46338|-5,34%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(acq_rel. acquire)|5,22574|5,39832|3,30%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(acq_rel. acquire)|5,66156|5,38044|-4,97%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(seq_cst. relaxed)|5,31198|6,82313|28,45%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(seq_cst. relaxed)|7,60092|8,2542|8,59%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(seq_cst. acquire)|5,3248|6,84395|28,53%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(seq_cst. acquire)|7,48102|8,25419|10,34%|
+|Baselib atomics (int64_t) | cmp_xchg_strong fail(seq_cst. seq_cst)|5,24991|7,65791|45,87%|
+|Baselib atomics (int64_t) | cmp_xchg_strong success(seq_cst. seq_cst)|7,41788|7,63039|2,86%|
+|std::atomic (int64_t) | load(relaxed)|0,00039|0,00039|0,00%|
+|std::atomic (int64_t) | load(acquire)|0,00039|0,00039|0,00%|
+|std::atomic (int64_t) | load(seq_cst)|0,0003925|0,000395796|0,84%|
+|std::atomic (int64_t) | store(relaxed)|0,00039|0,0003925|0,64%|
+|std::atomic (int64_t) | store(release)|0,00039125|0,00039|-0,32%|
+|std::atomic (int64_t) | store(seq_cst)|0,00039125|0,00039|-0,32%|
+|std::atomic (int64_t) | fetch_add(relaxed)|5,76841|5,04124|-12,61%|
+|std::atomic (int64_t) | fetch_add(acquire)|5,67638|5,23763|-7,73%|
+|std::atomic (int64_t) | fetch_add(release)|5,71074|5,21996|-8,59%|
+|std::atomic (int64_t) | fetch_add(acq_rel)|5,68082|5,17513|-8,90%|
+|std::atomic (int64_t) | fetch_add(seq_cst)|5,71148|5,25163|-8,05%|
+|std::atomic (int64_t) | fetch_and(relaxed)|5,76754|5,06334|-12,21%|
+|std::atomic (int64_t) | fetch_and(acquire)|5,68766|5,17591|-9,00%|
+|std::atomic (int64_t) | fetch_and(release)|5,70922|5,23549|-8,30%|
+|std::atomic (int64_t) | fetch_and(acq_rel)|5,76538|5,23106|-9,27%|
+|std::atomic (int64_t) | fetch_and(seq_cst)|5,71144|5,20844|-8,81%|
+|std::atomic (int64_t) | fetch_or(relaxed)|5,71144|5,06334|-11,35%|
+|std::atomic (int64_t) | fetch_or(acquire)|5,67575|5,17685|-8,79%|
+|std::atomic (int64_t) | fetch_or(release)|5,70869|5,17661|-9,32%|
+|std::atomic (int64_t) | fetch_or(acq_rel)|5,71081|5,21962|-8,60%|
+|std::atomic (int64_t) | fetch_or(seq_cst)|5,71097|5,2925|-7,33%|
+|std::atomic (int64_t) | fetch_xor(relaxed)|5,76597|5,04114|-12,57%|
+|std::atomic (int64_t) | fetch_xor(acquire)|5,71112|5,1749|-9,39%|
+|std::atomic (int64_t) | fetch_xor(release)|5,71097|5,28538|-7,45%|
+|std::atomic (int64_t) | fetch_xor(acq_rel)|5,76538|5,25347|-8,88%|
+|std::atomic (int64_t) | fetch_xor(seq_cst)|5,71125|5,209|-8,79%|
+|std::atomic (int64_t) | exchange(relaxed)|0,713731|0,720574|0,96%|
+|std::atomic (int64_t) | exchange(acquire)|5,52406|5,2086|-5,71%|
+|std::atomic (int64_t) | exchange(release)|1,42757|1,78423|24,98%|
+|std::atomic (int64_t) | exchange(acq_rel)|5,48457|5,17565|-5,63%|
+|std::atomic (int64_t) | exchange(seq_cst)|5,52522|5,17559|-6,33%|
+|std::atomic (int64_t) | cmp_xchg_weak(relaxed. relaxed) fail|5,28103|6,86618|30,02%|
+|std::atomic (int64_t) | cmp_xchg_weak(relaxed. relaxed) success|5,57233|6,65872|19,50%|
+|std::atomic (int64_t) | cmp_xchg_weak(acquire. relaxed) fail|5,32297|7,65681|43,84%|
+|std::atomic (int64_t) | cmp_xchg_weak(acquire. relaxed) success|5,55278|7,04572|26,89%|
+|std::atomic (int64_t) | cmp_xchg_weak(acquire. acquire) fail|5,19573|7,5397|45,11%|
+|std::atomic (int64_t) | cmp_xchg_weak(acquire. acquire) success|5,65387|7,06106|24,89%|
+|std::atomic (int64_t) | cmp_xchg_weak(release. relaxed) fail|5,16921|8,64542|67,25%|
+|std::atomic (int64_t) | cmp_xchg_weak(release. relaxed) success|5,8789|8,09059|37,62%|
+|std::atomic (int64_t) | cmp_xchg_weak(acq_rel. relaxed) fail|5,14874|8,4178|63,49%|
+|std::atomic (int64_t) | cmp_xchg_weak(acq_rel. relaxed) success|5,62648|8,15887|45,01%|
+|std::atomic (int64_t) | cmp_xchg_weak(acq_rel. acquire) fail|5,19702|8,41399|61,90%|
+|std::atomic (int64_t) | cmp_xchg_weak(acq_rel. acquire) success|5,61241|8,0948|44,23%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. relaxed) fail|5,6107|8,45259|50,65%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. relaxed) success|5,74546|8,06755|40,42%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. acquire) fail|5,19561|8,4248|62,15%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. acquire) success|5,83114|8,08243|38,61%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. seq_cst) fail|5,44959|8,5268|56,47%|
+|std::atomic (int64_t) | cmp_xchg_weak(seq_cst. seq_cst) success|5,68065|8,06806|42,03%|
+|std::atomic (int64_t) | cmp_xchg_strong(relaxed. relaxed) fail|5,37833|6,92512|28,76%|
+|std::atomic (int64_t) | cmp_xchg_strong(relaxed. relaxed) success|5,59084|6,70653|19,96%|
+|std::atomic (int64_t) | cmp_xchg_strong(acquire. relaxed) fail|5,22344|7,39602|41,59%|
+|std::atomic (int64_t) | cmp_xchg_strong(acquire. relaxed) success|5,53385|7,11215|28,52%|
+|std::atomic (int64_t) | cmp_xchg_strong(acquire. acquire) fail|5,19899|7,37137|41,78%|
+|std::atomic (int64_t) | cmp_xchg_strong(acquire. acquire) success|5,71289|7,13459|24,89%|
+|std::atomic (int64_t) | cmp_xchg_strong(release. relaxed) fail|5,18419|8,51836|64,31%|
+|std::atomic (int64_t) | cmp_xchg_strong(release. relaxed) success|5,62459|8,22757|46,28%|
+|std::atomic (int64_t) | cmp_xchg_strong(acq_rel. relaxed) fail|5,17071|8,19045|58,40%|
+|std::atomic (int64_t) | cmp_xchg_strong(acq_rel. relaxed) success|5,7873|8,10029|39,97%|
+|std::atomic (int64_t) | cmp_xchg_strong(acq_rel. acquire) fail|5,16332|8,22449|59,29%|
+|std::atomic (int64_t) | cmp_xchg_strong(acq_rel. acquire) success|5,87045|8,11597|38,25%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. relaxed) fail|5,57339|8,15235|46,27%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. relaxed) success|5,67978|8,15304|43,54%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. acquire) fail|5,19931|8,14173|56,59%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. acquire) success|5,75014|8,08624|40,63%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) fail|5,51236|8,15659|47,97%|
+|std::atomic (int64_t) | cmp_xchg_strong(seq_cst. seq_cst) success|5,63752|8,13753|44,35%|
 
 Most important observations are:
 -	baselib’s fetch_[op], exchange, compare-and-exchange show a clear improvement of some 10-20% - which is expected – and is a great result!
@@ -415,128 +415,128 @@ The test device for local tests was Huawei Honor 9 (Cortex A53).
 
 | Testcase | Benchmark | default, ns | outline, ns | Change |
 |---|---|---|---|---|
-|Atomic - Single Threaded (int64_t) |fetch_add(relaxed)|8,7645|13,472|53,71%|
-|Atomic - Single Threaded (int64_t) |fetch_add(acquire)|8,7609|13,509|54,20%|
-|Atomic - Single Threaded (int64_t) |fetch_add(release)|9,434|14,158|50,07%|
-|Atomic - Single Threaded (int64_t) |fetch_add(acq_rel)|9,4301|14,139|49,93%|
-|Atomic - Single Threaded (int64_t) |fetch_add(seq_cst)|12,126|14,821|22,22%|
-|Atomic - Single Threaded (int64_t) |fetch_and(relaxed)|8,7579|13,479|53,91%|
-|Atomic - Single Threaded (int64_t) |fetch_and(acquire)|8,7507|13,483|54,08%|
-|Atomic - Single Threaded (int64_t) |fetch_and(release)|9,4248|14,155|50,19%|
-|Atomic - Single Threaded (int64_t) |fetch_and(acq_rel)|9,4281|14,25|51,14%|
-|Atomic - Single Threaded (int64_t) |fetch_and(seq_cst)|12,12|14,827|22,33%|
-|Atomic - Single Threaded (int64_t) |fetch_or(relaxed)|8,7657|13,474|53,71%|
-|Atomic - Single Threaded (int64_t) |fetch_or(acquire)|8,7623|13,477|53,81%|
-|Atomic - Single Threaded (int64_t) |fetch_or(release)|9,4364|14,152|49,97%|
-|Atomic - Single Threaded (int64_t) |fetch_or(acq_rel)|9,4307|14,164|50,19%|
-|Atomic - Single Threaded (int64_t) |fetch_or(seq_cst)|12,133|14,829|22,22%|
-|Atomic - Single Threaded (int64_t) |fetch_xor(relaxed)|8,7602|13,472|53,79%|
-|Atomic - Single Threaded (int64_t) |fetch_xor(acquire)|8,7708|13,49|53,81%|
-|Atomic - Single Threaded (int64_t) |fetch_xor(release)|9,475|14,254|50,44%|
-|Atomic - Single Threaded (int64_t) |fetch_xor(acq_rel)|9,4521|14,145|49,65%|
-|Atomic - Single Threaded (int64_t) |fetch_xor(seq_cst)|12,134|14,84|22,30%|
-|Atomic - Single Threaded (int64_t) |exchange(relaxed)|0,00017724|0,00017163|-3,17%|
-|Atomic - Single Threaded (int64_t) |exchange(acquire)|8,7589|13,469|53,78%|
-|Atomic - Single Threaded (int64_t) |exchange(release)|0,00017292|0,00017162|-0,75%|
-|Atomic - Single Threaded (int64_t) |exchange(acq_rel)|10,784|15,503|43,76%|
-|Atomic - Single Threaded (int64_t) |exchange(seq_cst)|12,142|16,176|33,22%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(relaxed,relaxed)|4,7|12,808|172,51%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(relaxed,relaxed)|8,094|14,168|75,04%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acquire,relaxed)|4,723|11,465|142,75%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acquire,relaxed)|8,0849|14,251|76,27%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acquire,acquire)|4,716|12,806|171,54%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acquire,acquire)|8,0929|14,159|74,96%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(release,relaxed)|4,7166|11,454|142,84%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(release,relaxed)|8,7658|14,822|69,09%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acq_rel,relaxed)|4,7171|12,797|171,29%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acq_rel,relaxed)|8,7552|14,828|69,36%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(acq_rel,acquire)|4,7161|11,442|142,62%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(acq_rel,acquire)|8,7553|14,824|69,31%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,relaxed)|4,7327|12,9|172,57%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,relaxed)|13,471|16,173|20,06%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,acquire)|4,7116|14,16|200,53%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,acquire)|13,479|16,189|20,11%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak fail(seq_cst,seq_cst)|7,4291|12,812|72,46%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_weak success(seq_cst,seq_cst)|12,132|15,492|27,70%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(relaxed,relaxed)|4,7175|11,465|143,03%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(relaxed,relaxed)|10,103|14,152|40,08%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acquire,relaxed)|4,7216|12,803|171,16%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acquire,relaxed)|10,11|14,241|40,86%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acquire,acquire)|4,7157|11,468|143,19%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acquire,acquire)|10,113|14,161|40,03%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(release,relaxed)|4,7336|12,828|171,00%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(release,relaxed)|10,774|14,813|37,49%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acq_rel,relaxed)|4,7194|11,46|142,83%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acq_rel,relaxed)|10,8|14,842|37,43%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(acq_rel,acquire)|4,715|12,8|171,47%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(acq_rel,acquire)|10,776|14,821|37,54%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,relaxed)|4,7202|14,24|201,68%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,relaxed)|13,486|16,179|19,97%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,acquire)|4,7181|12,824|171,80%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,acquire)|13,485|16,189|20,05%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong fail(seq_cst,seq_cst)|7,4121|12,154|63,98%|
-|Atomic - Single Threaded (int64_t) |cmp_xchg_strong success(seq_cst,seq_cst)|12,801|15,5|21,08%|
-|std::atomic - Single Threaded (int64_t)|fetch_add(relaxed)|10,111|14,226|40,70%|
-|std::atomic - Single Threaded (int64_t)|fetch_add(acquire)|12,807|17,533|36,90%|
-|std::atomic - Single Threaded (int64_t)|fetch_add(release)|13,485|18,209|35,03%|
-|std::atomic - Single Threaded (int64_t)|fetch_add(acq_rel)|13,464|17,523|30,15%|
-|std::atomic - Single Threaded (int64_t)|fetch_add(seq_cst)|13,469|17,535|30,19%|
-|std::atomic - Single Threaded (int64_t)|fetch_and(relaxed)|10,121|14,14|39,71%|
-|std::atomic - Single Threaded (int64_t)|fetch_and(acquire)|12,819|17,543|36,85%|
-|std::atomic - Single Threaded (int64_t)|fetch_and(release)|13,464|18,29|35,84%|
-|std::atomic - Single Threaded (int64_t)|fetch_and(acq_rel)|13,506|17,521|29,73%|
-|std::atomic - Single Threaded (int64_t)|fetch_and(seq_cst)|13,48|17,535|30,08%|
-|std::atomic - Single Threaded (int64_t)|fetch_or(relaxed)|10,116|14,17|40,08%|
-|std::atomic - Single Threaded (int64_t)|fetch_or(acquire)|12,802|17,514|36,81%|
-|std::atomic - Single Threaded (int64_t)|fetch_or(release)|13,483|18,199|34,98%|
-|std::atomic - Single Threaded (int64_t)|fetch_or(acq_rel)|13,481|17,525|30,00%|
-|std::atomic - Single Threaded (int64_t)|fetch_or(seq_cst)|13,48|17,5|29,82%|
-|std::atomic - Single Threaded (int64_t)|fetch_xor(relaxed)|10,135|14,27|40,80%|
-|std::atomic - Single Threaded (int64_t)|fetch_xor(acquire)|12,798|17,517|36,87%|
-|std::atomic - Single Threaded (int64_t)|fetch_xor(release)|13,471|18,187|35,01%|
-|std::atomic - Single Threaded (int64_t)|fetch_xor(acq_rel)|13,482|17,516|29,92%|
-|std::atomic - Single Threaded (int64_t)|fetch_xor(seq_cst)|13,62|17,516|28,60%|
-|std::atomic - Single Threaded (int64_t)|exchange(relaxed)|4,2759|4,0396|-5,53%|
-|std::atomic - Single Threaded (int64_t)|exchange(acquire)|12,796|17,529|36,99%|
-|std::atomic - Single Threaded (int64_t)|exchange(release)|9,437|9,446|0,10%|
-|std::atomic - Single Threaded (int64_t)|exchange(acq_rel)|14,826|18,97|27,95%|
-|std::atomic - Single Threaded (int64_t)|exchange(seq_cst)|14,821|18,872|27,33%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(relaxed, relaxed,fail)|16,841|28,313|68,12%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(relaxed, relaxed,success)|14,151|27,637|95,30%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, relaxed,fail)|22,244|31,011|39,41%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, relaxed,success)|19,546|29,074|48,75%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, acquire,fail)|19,545|31|58,61%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acquire, acquire,success)|18,863|28,982|53,64%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(release, relaxed,fail)|20,208|30,334|50,11%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(release, relaxed,success)|19,544|30,014|53,57%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, relaxed,fail)|22,266|29,694|33,36%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, relaxed,success)|20,232|29,756|47,07%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, acquire,fail)|19,547|29,766|52,28%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(acq_rel, acquire,success)|20,216|29,784|47,33%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, relaxed,fail)|24,274|32,373|33,36%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, relaxed,success)|22,851|32,993|44,38%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, acquire,fail)|20,89|33,678|61,22%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, acquire,success)|20,88|35,128|68,24%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,fail)|22,91|32,35|41,20%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,success)|21,559|33,07|53,39%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(relaxed, relaxed,fail)|16,856|28,309|67,95%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(relaxed, relaxed,success)|14,151|27,72|95,89%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, relaxed,fail)|22,247|30,994|39,32%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, relaxed,success)|19,531|28,984|48,40%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, acquire,fail)|20,884|30,979|48,34%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acquire, acquire,success)|19,552|29,102|48,84%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(release, relaxed,fail)|20,21|30,34|50,12%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(release, relaxed,success)|19,537|29,982|53,46%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, relaxed,fail)|22,227|29,674|33,50%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, relaxed,success)|20,196|29,732|47,22%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, acquire,fail)|20,86|29,6|41,90%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(acq_rel, acquire,success)|20,205|29,645|46,72%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, relaxed,fail)|24,917|32,326|29,73%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, relaxed,success)|22,35|33,308|49,03%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, acquire,fail)|20,898|33,711|61,31%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, acquire,success)|20,219|35,049|73,35%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,fail)|22,916|32,376|41,28%|
-|std::atomic - Single Threaded (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,success)|20,902|33,571|60,61%|
+|Baselib atomics (int64_t) |fetch_add(relaxed)|8,7645|13,472|53,71%|
+|Baselib atomics (int64_t) |fetch_add(acquire)|8,7609|13,509|54,20%|
+|Baselib atomics (int64_t) |fetch_add(release)|9,434|14,158|50,07%|
+|Baselib atomics (int64_t) |fetch_add(acq_rel)|9,4301|14,139|49,93%|
+|Baselib atomics (int64_t) |fetch_add(seq_cst)|12,126|14,821|22,22%|
+|Baselib atomics (int64_t) |fetch_and(relaxed)|8,7579|13,479|53,91%|
+|Baselib atomics (int64_t) |fetch_and(acquire)|8,7507|13,483|54,08%|
+|Baselib atomics (int64_t) |fetch_and(release)|9,4248|14,155|50,19%|
+|Baselib atomics (int64_t) |fetch_and(acq_rel)|9,4281|14,25|51,14%|
+|Baselib atomics (int64_t) |fetch_and(seq_cst)|12,12|14,827|22,33%|
+|Baselib atomics (int64_t) |fetch_or(relaxed)|8,7657|13,474|53,71%|
+|Baselib atomics (int64_t) |fetch_or(acquire)|8,7623|13,477|53,81%|
+|Baselib atomics (int64_t) |fetch_or(release)|9,4364|14,152|49,97%|
+|Baselib atomics (int64_t) |fetch_or(acq_rel)|9,4307|14,164|50,19%|
+|Baselib atomics (int64_t) |fetch_or(seq_cst)|12,133|14,829|22,22%|
+|Baselib atomics (int64_t) |fetch_xor(relaxed)|8,7602|13,472|53,79%|
+|Baselib atomics (int64_t) |fetch_xor(acquire)|8,7708|13,49|53,81%|
+|Baselib atomics (int64_t) |fetch_xor(release)|9,475|14,254|50,44%|
+|Baselib atomics (int64_t) |fetch_xor(acq_rel)|9,4521|14,145|49,65%|
+|Baselib atomics (int64_t) |fetch_xor(seq_cst)|12,134|14,84|22,30%|
+|Baselib atomics (int64_t) |exchange(relaxed)|0,00017724|0,00017163|-3,17%|
+|Baselib atomics (int64_t) |exchange(acquire)|8,7589|13,469|53,78%|
+|Baselib atomics (int64_t) |exchange(release)|0,00017292|0,00017162|-0,75%|
+|Baselib atomics (int64_t) |exchange(acq_rel)|10,784|15,503|43,76%|
+|Baselib atomics (int64_t) |exchange(seq_cst)|12,142|16,176|33,22%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(relaxed,relaxed)|4,7|12,808|172,51%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(relaxed,relaxed)|8,094|14,168|75,04%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(acquire,relaxed)|4,723|11,465|142,75%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(acquire,relaxed)|8,0849|14,251|76,27%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(acquire,acquire)|4,716|12,806|171,54%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(acquire,acquire)|8,0929|14,159|74,96%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(release,relaxed)|4,7166|11,454|142,84%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(release,relaxed)|8,7658|14,822|69,09%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(acq_rel,relaxed)|4,7171|12,797|171,29%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(acq_rel,relaxed)|8,7552|14,828|69,36%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(acq_rel,acquire)|4,7161|11,442|142,62%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(acq_rel,acquire)|8,7553|14,824|69,31%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(seq_cst,relaxed)|4,7327|12,9|172,57%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(seq_cst,relaxed)|13,471|16,173|20,06%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(seq_cst,acquire)|4,7116|14,16|200,53%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(seq_cst,acquire)|13,479|16,189|20,11%|
+|Baselib atomics (int64_t) |cmp_xchg_weak fail(seq_cst,seq_cst)|7,4291|12,812|72,46%|
+|Baselib atomics (int64_t) |cmp_xchg_weak success(seq_cst,seq_cst)|12,132|15,492|27,70%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(relaxed,relaxed)|4,7175|11,465|143,03%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(relaxed,relaxed)|10,103|14,152|40,08%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(acquire,relaxed)|4,7216|12,803|171,16%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(acquire,relaxed)|10,11|14,241|40,86%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(acquire,acquire)|4,7157|11,468|143,19%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(acquire,acquire)|10,113|14,161|40,03%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(release,relaxed)|4,7336|12,828|171,00%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(release,relaxed)|10,774|14,813|37,49%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(acq_rel,relaxed)|4,7194|11,46|142,83%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(acq_rel,relaxed)|10,8|14,842|37,43%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(acq_rel,acquire)|4,715|12,8|171,47%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(acq_rel,acquire)|10,776|14,821|37,54%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(seq_cst,relaxed)|4,7202|14,24|201,68%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(seq_cst,relaxed)|13,486|16,179|19,97%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(seq_cst,acquire)|4,7181|12,824|171,80%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(seq_cst,acquire)|13,485|16,189|20,05%|
+|Baselib atomics (int64_t) |cmp_xchg_strong fail(seq_cst,seq_cst)|7,4121|12,154|63,98%|
+|Baselib atomics (int64_t) |cmp_xchg_strong success(seq_cst,seq_cst)|12,801|15,5|21,08%|
+|std::atomic (int64_t)|fetch_add(relaxed)|10,111|14,226|40,70%|
+|std::atomic (int64_t)|fetch_add(acquire)|12,807|17,533|36,90%|
+|std::atomic (int64_t)|fetch_add(release)|13,485|18,209|35,03%|
+|std::atomic (int64_t)|fetch_add(acq_rel)|13,464|17,523|30,15%|
+|std::atomic (int64_t)|fetch_add(seq_cst)|13,469|17,535|30,19%|
+|std::atomic (int64_t)|fetch_and(relaxed)|10,121|14,14|39,71%|
+|std::atomic (int64_t)|fetch_and(acquire)|12,819|17,543|36,85%|
+|std::atomic (int64_t)|fetch_and(release)|13,464|18,29|35,84%|
+|std::atomic (int64_t)|fetch_and(acq_rel)|13,506|17,521|29,73%|
+|std::atomic (int64_t)|fetch_and(seq_cst)|13,48|17,535|30,08%|
+|std::atomic (int64_t)|fetch_or(relaxed)|10,116|14,17|40,08%|
+|std::atomic (int64_t)|fetch_or(acquire)|12,802|17,514|36,81%|
+|std::atomic (int64_t)|fetch_or(release)|13,483|18,199|34,98%|
+|std::atomic (int64_t)|fetch_or(acq_rel)|13,481|17,525|30,00%|
+|std::atomic (int64_t)|fetch_or(seq_cst)|13,48|17,5|29,82%|
+|std::atomic (int64_t)|fetch_xor(relaxed)|10,135|14,27|40,80%|
+|std::atomic (int64_t)|fetch_xor(acquire)|12,798|17,517|36,87%|
+|std::atomic (int64_t)|fetch_xor(release)|13,471|18,187|35,01%|
+|std::atomic (int64_t)|fetch_xor(acq_rel)|13,482|17,516|29,92%|
+|std::atomic (int64_t)|fetch_xor(seq_cst)|13,62|17,516|28,60%|
+|std::atomic (int64_t)|exchange(relaxed)|4,2759|4,0396|-5,53%|
+|std::atomic (int64_t)|exchange(acquire)|12,796|17,529|36,99%|
+|std::atomic (int64_t)|exchange(release)|9,437|9,446|0,10%|
+|std::atomic (int64_t)|exchange(acq_rel)|14,826|18,97|27,95%|
+|std::atomic (int64_t)|exchange(seq_cst)|14,821|18,872|27,33%|
+|std::atomic (int64_t)|cmp_xchg_weak(relaxed, relaxed,fail)|16,841|28,313|68,12%|
+|std::atomic (int64_t)|cmp_xchg_weak(relaxed, relaxed,success)|14,151|27,637|95,30%|
+|std::atomic (int64_t)|cmp_xchg_weak(acquire, relaxed,fail)|22,244|31,011|39,41%|
+|std::atomic (int64_t)|cmp_xchg_weak(acquire, relaxed,success)|19,546|29,074|48,75%|
+|std::atomic (int64_t)|cmp_xchg_weak(acquire, acquire,fail)|19,545|31|58,61%|
+|std::atomic (int64_t)|cmp_xchg_weak(acquire, acquire,success)|18,863|28,982|53,64%|
+|std::atomic (int64_t)|cmp_xchg_weak(release, relaxed,fail)|20,208|30,334|50,11%|
+|std::atomic (int64_t)|cmp_xchg_weak(release, relaxed,success)|19,544|30,014|53,57%|
+|std::atomic (int64_t)|cmp_xchg_weak(acq_rel, relaxed,fail)|22,266|29,694|33,36%|
+|std::atomic (int64_t)|cmp_xchg_weak(acq_rel, relaxed,success)|20,232|29,756|47,07%|
+|std::atomic (int64_t)|cmp_xchg_weak(acq_rel, acquire,fail)|19,547|29,766|52,28%|
+|std::atomic (int64_t)|cmp_xchg_weak(acq_rel, acquire,success)|20,216|29,784|47,33%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, relaxed,fail)|24,274|32,373|33,36%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, relaxed,success)|22,851|32,993|44,38%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, acquire,fail)|20,89|33,678|61,22%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, acquire,success)|20,88|35,128|68,24%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,fail)|22,91|32,35|41,20%|
+|std::atomic (int64_t)|cmp_xchg_weak(seq_cst, seq_cst,success)|21,559|33,07|53,39%|
+|std::atomic (int64_t)|cmp_xchg_strong(relaxed, relaxed,fail)|16,856|28,309|67,95%|
+|std::atomic (int64_t)|cmp_xchg_strong(relaxed, relaxed,success)|14,151|27,72|95,89%|
+|std::atomic (int64_t)|cmp_xchg_strong(acquire, relaxed,fail)|22,247|30,994|39,32%|
+|std::atomic (int64_t)|cmp_xchg_strong(acquire, relaxed,success)|19,531|28,984|48,40%|
+|std::atomic (int64_t)|cmp_xchg_strong(acquire, acquire,fail)|20,884|30,979|48,34%|
+|std::atomic (int64_t)|cmp_xchg_strong(acquire, acquire,success)|19,552|29,102|48,84%|
+|std::atomic (int64_t)|cmp_xchg_strong(release, relaxed,fail)|20,21|30,34|50,12%|
+|std::atomic (int64_t)|cmp_xchg_strong(release, relaxed,success)|19,537|29,982|53,46%|
+|std::atomic (int64_t)|cmp_xchg_strong(acq_rel, relaxed,fail)|22,227|29,674|33,50%|
+|std::atomic (int64_t)|cmp_xchg_strong(acq_rel, relaxed,success)|20,196|29,732|47,22%|
+|std::atomic (int64_t)|cmp_xchg_strong(acq_rel, acquire,fail)|20,86|29,6|41,90%|
+|std::atomic (int64_t)|cmp_xchg_strong(acq_rel, acquire,success)|20,205|29,645|46,72%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, relaxed,fail)|24,917|32,326|29,73%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, relaxed,success)|22,35|33,308|49,03%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, acquire,fail)|20,898|33,711|61,31%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, acquire,success)|20,219|35,049|73,35%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,fail)|22,916|32,376|41,28%|
+|std::atomic (int64_t)|cmp_xchg_strong(seq_cst, seq_cst,success)|20,902|33,571|60,61%|
 
 The absolute numbers are significantly slower than on the S22 (more than 2x), which is not surprising.
 
