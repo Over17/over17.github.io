@@ -6,7 +6,7 @@ categories: performance simd cooking
 ---
 # Why cooking?
 
-At Unity I was blessed to work for several years together with Andreas Fredriksson on some cool SIMD stuff. It's easy - you hear Andreas Fredriksson, you think SIMD and intrinsics. Thank you Andreas, I learned a lot from you! (passion for SIMD included)
+At Unity I was blessed to work for several years together with [Andreas Fredriksson](https://github.com/deplinenoise) on some cool SIMD stuff. It's easy - you hear Andreas Fredriksson, you think SIMD and intrinsics. Thank you Andreas, I learned a lot from you! (passion for SIMD included)
 
 In one of his brilliant talks, he compared SIMD operations to cutting sellerie - and this is a fantastic analogy - even more than you can imagine.
 
