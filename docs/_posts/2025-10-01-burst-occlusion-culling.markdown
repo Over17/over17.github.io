@@ -32,7 +32,7 @@ Because of the typed overrides (which sometimes do the same thing - for example,
 
 For more information on the intrinsics and their usage, you could refer to talks recorded by our friends at Arm and myself:
 
-[Using Burst Compiler to optimize for Android | Unite Now 2020](https://www.youtube.com/watch?v=WnJV6J-taIM)
+[Using Burst Compiler to optimize for Android - Unite Now 2020](https://www.youtube.com/watch?v=WnJV6J-taIM)
 
 [Arm @ GDC 2021 : Supercharging mobile performance with Arm Neon and Unity Burst Compiler](https://www.youtube.com/watch?v=7iEUvlUyr4k)
 
