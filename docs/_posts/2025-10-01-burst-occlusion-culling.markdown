@@ -6,7 +6,7 @@ categories: performance intrinsics arm neon intel sse burst
 ---
 # The Project
 
-Our amazing Geometry and Lighting team was working on a high-performance implementation of masked CPU occlusion culling based on [Intel's algorithm](https://www.intel.com/content/dam/develop/external/us/en/documents/masked-software-occlusion-culling-779241.pdf). The team has done some mathematical and programmatical improvements to the algorithm, and implemented it for Intel using SSE intrinsics and targeting SSE4 CPUs. [Felix Klinge](https://github.com/FelixK15) and I joined the project at a later stage to add an Arm Neon implementation, too.
+Our amazing Geometry and Lighting team was working on a high-performance implementation of masked CPU occlusion culling based on [Intel's algorithm](https://www.intel.com/content/dam/develop/external/us/en/documents/masked-software-occlusion-culling-779241.pdf). The team has done some mathematical and programmatical improvements to the algorithm, and implemented it for Intel using SSE intrinsics and targeting SSE4 CPUs. [Felix Klinge](https://felixk15.github.io/) and I joined the project at a later stage to add an Arm Neon implementation, too.
 
 Some important background. The project was a part of the Unity Entities Graphics package, so the source code is available - or at least was available at the time of development - as a preview version. The code is written in C# (more specifically, in HPC# - a subset of C# which doesn't support reference types, and for that reason generates no gargbage) using Unity Burst compiler.
 
@@ -42,7 +42,7 @@ So, we had the SSE code written in HPC# using Burst intrinsics, and started "con
 
 To easier match SSE intrinsics to Neon, one can use the amazing SSE2Neon lib, with source code [available here](https://github.com/DLTcollab/sse2neon). Of course, it's all written in C, but it's invaluable in our task because translating the code to C# is super easy - as I mentioned before, the API matches Arm's C API (ACLE) very closely.
 
-Unsurprisingly, it appears that most of common math operations have equivalents for both Intel and Arm. Of course, the parameter order is often different - just so that your life would not be that easy :) One of the examples is multiply-subtract:
+Unsurprisingly, it appears that most of the common math operations have equivalents for both Intel and Arm. Of course, the parameter order is often different - just so that your life would not be that easy :) One of the examples is multiply-subtract:
 
 ```
 fmsub_ps(a, b, c) => a * b - c
@@ -63,7 +63,7 @@ Okay, now that we have the feature working from a functional POV, we can start p
 
 We profiled the test project on an Android phone: Samsung Galaxy S22; it has a single Cortex X2 core (big), three Cortex A710 (medium) and four Cortex A510 (small cores, mostly unused by Unity). As usual, we used the Unity Profiler, then gathered Perfetto (systrace) and a sampling profile (Arm Streamline).
 
-The sampling profiler works quite well even with Bursted code. If you think of it for a moment, it's C# code that is translated into LLVM IR and then into assembly... but the symbols work (!!) and you get basically link from assembly to the line of your C# code (!!) which is super amazing.
+The sampling profiler works quite well even with Bursted code. If you think of it for a moment, it's C# code that is translated into LLVM IR and then into assembly... but the symbols work (!!) and you get basically a link from the assembly to the line of your C# code (!!) which is super amazing.
 
 There are several stages (jobs) of the culling process, `RasterizeJob` being the longest and the most important.
 
