@@ -31,7 +31,9 @@ Fun story; as you may know, naming is one of the major problems in computer scie
 Because of the typed overrides (which sometimes do the same thing - for example, for bitwise operations) the number of Neon intrinsics is huge, so I did a [categorized summary table](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-burst-intrinsics-neon.html) which makes searching easier.
 
 For more information on the intrinsics and their usage, you could refer to talks recorded by our friends at Arm and myself:
+
 [Using Burst Compiler to optimize for Android | Unite Now 2020](https://www.youtube.com/watch?v=WnJV6J-taIM)
+
 [Arm @ GDC 2021 : Supercharging mobile performance with Arm Neon and Unity Burst Compiler](https://www.youtube.com/watch?v=7iEUvlUyr4k)
 
 ## Translating to Neon
@@ -49,9 +51,9 @@ vmlsq_f32(a, b, c) => a - b * c
 
 Some of the "problematic" Intel instructions are shuffle and movemask. They appear to have no equivalent in Neon.
 
-Overall, shuffle as a "random" element manipulation routine is available in Intel but completely missing in Arm. This may seem as an advantage for Intel, but in fact, when solving problems, you rarely need a truly _random_ manipulation. You have to be creative and know the instruction set to come up with a solution to the actual __problem__. Okay, if you're out of ideas, bitwise select `BSL` or its ACLE equivalent `vbslq_s8()` can do the job too.
+Overall, shuffle as a "random" element manipulation routine is available in Intel but completely missing in Arm. This may seem as an advantage for Intel, but in fact, when solving problems, you rarely need a truly _random_ manipulation. You have to be creative and know the instruction set to come up with a solution to the actual _problem_. Okay, if you're out of ideas, bitwise select `BSL` or its ACLE equivalent `vbslq_s8()` can do the job too.
 
-`movemask` represents a group of instuctions that manipulate a scalar next to vector variables. Packing a mask into an int is not an uncommon pattern in SSE world; it might be a legacy thing caused by some microarchitectural decisions, I am not aware of the true reasons behind this decision. In the Arm world, as far as I know, `ADDV` and friends is one of the several ways to get a scalar out of a vector; in other cases, you have to be creative... or solve the actual __problem__ in a different way. In our case, the target SSE level wouldn't allow for a shift by register, so the team had to calculate and use intermediate scalars. On the other hand, Neon supports shift by register by default (ACLE method `vshlq_s32()`), so we were able to get rid of some tricky instructions in the most efficient way.
+`movemask` represents a group of instuctions that manipulate a scalar next to vector variables. Packing a mask into an int is not an uncommon pattern in SSE world; it might be a legacy thing caused by some microarchitectural decisions, I am not aware of the true reasons behind this decision. In the Arm world, as far as I know, `ADDV` and friends is one of the several ways to get a scalar out of a vector; in other cases, you have to be creative... or solve the actual _problem_ in a different way. In our case, the target SSE level wouldn't allow for a shift by register, so the team had to calculate and use intermediate scalars. On the other hand, Neon supports shift by register by default (ACLE method `vshlq_s32()`), so we were able to get rid of some tricky instructions in the most efficient way.
 
 To be honest, I didn't find a good strategy to check if the Intel and Arm code written in CPU intrinsics is "equivalent". You can try doing some debugging with data... but a) it's really hard when you have much data b) unfortunately you cannot debug Neon intrinsics in Burst for a number of reasons. So what I did is leverage the code review skill, do IDE split screen, and compare the Intel and the Arm code line by line. It appeared to work out in the end, we finally had the test working correctly.
 
@@ -71,7 +73,7 @@ So Felix and I looked at the profile and found that third of the time in `Raster
 
 We removed the allocation of these temp data structures by making it more permanent. Yes it means slightly increased memory usage, but the CPU time spent in `RasterizeJob` was cut by 2.3x.
 
-![Unity profiler, RasterizeJob improvement on Intel](/assets/images/2025-10-01-burst-occlusion-culling-rasterizejob-improvement-intel/png)
+![Unity profiler, RasterizeJob improvement on Intel](/assets/images/2025-10-01-burst-occlusion-culling-rasterizejob-improvement-intel.png)
 
 The screenshot was taken on Intel; on Arm, the CPU total time went down from ~15ms per frame to ~4ms per frame, or 3.75x faster.
 
