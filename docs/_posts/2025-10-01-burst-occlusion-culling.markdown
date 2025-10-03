@@ -83,6 +83,15 @@ Not bad, and benefits both CPU architectures which is great!
 
 Another nice optimization was made to `DecodeMaskedDepthJob`. It's a job that is only used when Depth or Test debug views were active - something a developer would use in the Editor, but not something which runs in production. I would say, this is a classical SIMD improvement.
 
+This is a test scene rendered in normal mode. Screenshot taken from an Android device:
+![Depth view, sample](/assets/images/2025-10-01-burst-occlusion-culling-decodemaskeddepthjob-scene.png)
+
+Same scene as above, depth view. Screenshot taken from an Android device:
+![Depth view, sample](/assets/images/2025-10-01-burst-occlusion-culling-decodemaskeddepthjob-depthview.png)
+
+Same scene as above, test view. Screenshot taken from an Android device. Game objects marked red were culled from the scene:
+![Test view, sample](/assets/images/2025-10-01-burst-occlusion-culling-decodemaskeddepthjob-testview.png)
+
 The original code was processing data at a per-pixel basis; the resulting depth float was selected based on the bit in the mask, something like this:
 
 ```
