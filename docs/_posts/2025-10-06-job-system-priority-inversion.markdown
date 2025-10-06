@@ -75,30 +75,30 @@ A job that lasted less than **46 microseconds (!!) to complete, took more than 5
 
 ## The Priority Inversion
 
-First option:
+First case:
 - you have `thread1` which runs a load that is on the critical path
 - this thread gets pre-empted (interrupted) by `thread2`, which does something long but not that important
-- when the `thread2` is done (or the scheduler window is over), the system may get back to thread1... or may not do so.
+- when the `thread2` is done (or the scheduler window is over), the system may get back to `thread1`... or may not do so.
 - the less cores you have available in the system, the worse the effect. (and you have little control over that!)
-- spawning more worker threads may make things worse too. I often heard advice from our platform partners that we should spawn more threads and let the OS handle it. <img src="/assets/images/dealwithit.gif"/>. However, the more threads are there, the more pre-emtping is going to happen. Please remember that cores may come offline, so we have even more threads for even less CPU cores.
+- spawning more worker threads may make things worse too. I often heard advice from our platform partners that we should spawn more threads and let the OS handle it <img src="/assets/images/dealwithit.gif"/>. However, the more threads are there, the more pre-emtping is going to happen. Please remember that cores may come offline, so we have even more threads for even less CPU cores.
 
-Second option:
+Second case:
 There is a subtype of such priority inversion instances where the load on the critical path gets scheduled on a slow little core, while the big cores are busy doing non-critical work because the queue of threads to run is not empty. In theory, if the code on the critical path loads CPU enough, the governor should quickly migrate the thread to a big core... but in practice, I've seen such priority inversion cases causing nasty slowdowns and glitches. This is one of the reasons why Unity is currently NOT using little cores to run critical threads like UnityMain, Gfx device worker thread or Job worker threads.
 
-Unfortunately I haven't got any systrace screenshots to showcase this option right now.
+Unfortunately I haven't got any systrace screenshots to show this second case happening right now.
 
 ## Solution..?
 
-I have showcased two possible cases of priority inversion (high-prio thread waiting) above, and they cause noticeable glitches, especially in games where meeting frame deadlines is crucial.
+I have showcased two possible cases of priority inversion above, and they cause noticeable glitches, especially in games where meeting frame deadlines is crucial.
 
-How we tried to solve the issue?
+How did we try to solve the issue?
 
-Changing thread priorities does not really help. First of all, you can't really change thread priorities in user space on Android (you can change niceness though). There are always threads of higher priority class (`SCHED_FIFO` and `SCHED_RR`) that will interrupt your threads once they need to run. Second, you don't want to make ONLY job worker threads higher prio. Main, gfx and jobworker threads should have the same priority, otherwise other side effects will appear.
+Changing thread priorities does not really help. First of all, you can't really change thread priorities in user space on Android (you can change niceness though). There are always threads of higher priority class (`SCHED_FIFO` and `SCHED_RR`) that will interrupt your threads once they need to run. Second, you don't want to make ONLY job worker threads higher prio. Main, Gfx and Job Worker threads should have the same priority, otherwise other side effects will appear.
 
-In the end, it was decided to exclude small cores from running UnityMain, Gfx worker and Job workers threads. Thread affinity for those is set to medium and big cores. This reduces nasty issues of critical threads ending up on a small core clocked at 300Mhz for a timeframe of several milliseconds. This decision is quite old and had caused issues when the core detection algorithm fails on a new SoC, leaving only 2 cores in use instead of 4 or even 6.
+In the end, it was decided to exclude small cores from running UnityMain, Gfx worker and Job Worker threads. Thread affinity for those is being set to medium and big cores. This reduces nasty issues of critical threads ending up on a small core clocked at 300Mhz for a timeframe of several milliseconds. This decision is quite old and had caused issues when the core detection algorithm fails on a new SoC, leaving only 2 cores in use instead of 4 or even 6.
 
 Since then, many improvements have happened to the Linux scheduler and Android code, like the [Energy Aware Scheduling](https://docs.kernel.org/scheduler/sched-energy.html). I suggested several times that we remove the thread affinity and let the OS scheduler decide, and then work with all stakeholders (Google, Arm and phone manufacturers) to fix issues, but it was not implemented due to high risk of immediate regressions.
 
-I think the roots of the issue lay within the CPU scheduler and governor being not perfect. They need a workload to last for something like a millisecond (or maybe a few) to decide whether to clock up the core or even to move the thread to a beefier core, and this is makes sense; doing movements because of shorter bursts is less efficient. Maybe if the scheduler could deduce that this thread is waiting for another one to finish, and take this into account when scheduling, even to a point when there is a tree or a graph of thread dependencies maintained, that could help. On the other hand, the application (game) could provide such dependencies to the scheduler to make its job easier.
+I think the roots of the issue lay within the CPU scheduler and governor being not perfect. They need a workload to last for something like a millisecond (or maybe a few) to decide whether to clock up the core or even to move the thread to a beefier core, and this makes sense; migrating a thread because of shorter bursts is less efficient. Maybe if the scheduler could deduce that this thread is waiting for another one to finish, and take this into account when scheduling, even to a point when there is a tree or a graph of thread dependencies maintained, that could help. On the other hand, the application (game) could provide such dependencies to the scheduler to make its job easier. To be honest, I don't know if such a suggestion is viable from implementation point of view.
 
-The priority inversion is one of the issues that is typical to modern heterogeneous CPU systems running multi-threaded workloads, and it also shows that simple extensive solutions like "spawn more threads" don't really work.
+The priority inversion is one of the issues that is typical to modern heterogeneous CPU systems running multi-threaded workloads. It may cause visual glitches in games because of missed frame presentation deadlines. The reasons are not entirely clear, because much of what's happening in the OS kernel (CPU scheduler and governor) is a black box, plus the code may be tweaked by device manufacturers. It also shows that simple extensive solutions like "spawn more threads" don't really work, and a robust solution is still to be found.
