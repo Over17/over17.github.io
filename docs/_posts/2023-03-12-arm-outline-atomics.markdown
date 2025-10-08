@@ -2,6 +2,7 @@
 layout: post
 title:  "Arm outline atomics"
 date:   2023-03-12 13:36:00 +0100
+tags: performance atomics arm
 ---
 ## Arm outline atomics
 

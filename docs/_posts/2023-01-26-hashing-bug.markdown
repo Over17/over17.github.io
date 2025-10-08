@@ -2,6 +2,7 @@
 layout: post
 title:  "Hashing, IL2CPP and LLVM bug Investigation"
 date:   2023-01-26 12:15:00 +0300
+tags:	llvm
 ---
 ## Hashing, IL2CPP and LLVM bug Investigation
 
