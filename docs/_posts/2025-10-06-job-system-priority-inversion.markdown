@@ -2,7 +2,6 @@
 layout: post
 title:  "Priority inversion issues in multithreaded job systems running on heterogeneous CPU systems"
 date:   2025-10-06 11:15:00 +0300
-categories: performance multithreaded
 ---
 ## Introduction
 

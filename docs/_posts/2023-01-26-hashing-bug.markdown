@@ -1,4 +1,9 @@
-# Hashing, IL2CPP and LLVM bug Investigation
+---
+layout: post
+title:  "Hashing, IL2CPP and LLVM bug Investigation"
+date:   2023-01-27 12:15:00 +0300
+---
+## Hashing, IL2CPP and LLVM bug Investigation
 
 
 When working on the Android NDK upgrade, I stumbled upon 26 red tests related to hashing in one of our test suites. Here’s an example:
