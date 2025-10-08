@@ -2,11 +2,11 @@
 layout: post
 title:  "Priority inversion issues in multithreaded job systems running on heterogeneous CPU systems"
 date:   2025-10-06 11:15:00 +0300
-categories: performance multithreaded
+tags: performance multithreaded
 ---
 ## Introduction
 
-This post is about a bug in Unity job system that was found while I was working on the [Burst masked occlusion culling](burst-occlusion-culling.html). However, another issue which is described here is much more global and significant; it is what I call **"priority inversion in multithreaded job systems"**.
+This post is about a bug in Unity job system that was found while I was working on the [Burst masked occlusion culling](https://over17.github.io/2025/10/01/burst-occlusion-culling.html). However, another issue which is described here is much more global and significant; it is what I call **"priority inversion in multithreaded job systems"**.
 
 The short version of the issue comes as follows: a job is on the critical path, and the application is waiting for it to finish on a job system thread. Then this critical job is being neglected by the operating system - either by scheduling it on a slow CPU core, or by interrupting the job and giving the CPU to low-priority tasks. In the end, it leads to sporadic delays that are especially noticeable in games.
 

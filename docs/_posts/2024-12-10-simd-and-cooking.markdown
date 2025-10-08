@@ -2,7 +2,7 @@
 layout: post
 title:  "SIMD and Cooking"
 date:   2024-12-10 18:15:00 +0300
-categories: performance simd cooking
+tags: performance simd cooking
 ---
 # Why cooking?
 

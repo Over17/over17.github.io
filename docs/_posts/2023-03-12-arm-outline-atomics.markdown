@@ -2,9 +2,9 @@
 layout: post
 title:  "Arm outline atomics"
 date:   2023-03-12 13:36:00 +0100
-categories: performance atomics arm
+tags: performance atomics arm
 ---
-# Arm outline atomics
+## Arm outline atomics
 
 One of the features introduced in the Armv8.1-A architecture version were new atomic instructions, also known as LSE (large system extensions). They include a number of atomic operations done with a single atomic instruction (CAS – compare and swap, arithmetic operations etc.) which result in a significant performance improvement over “normal” implementation, which usually has exclusive load, operation, exclusive store, check if the operation was not interrupted and a branch if it was interrupted (also known as LL/SC). The performance improvement could be estimated as roughly 20%, and could benefit lockless algorithms and containers in Unity, as well as the job system (especially with tiny jobs) and other subsystems.
 

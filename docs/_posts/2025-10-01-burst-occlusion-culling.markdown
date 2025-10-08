@@ -2,7 +2,7 @@
 layout: post
 title:  "Converting SSE intrinsics code to Neon. Burst masked occlusion culling"
 date:   2025-10-01 09:45:00 +0100
-categories: performance intrinsics arm neon intel sse burst
+tags: performance intrinsics arm neon intel sse burst
 ---
 # The Project
 
